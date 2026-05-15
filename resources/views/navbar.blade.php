@@ -17,6 +17,12 @@
 
                 <!-- Intervention Records -->
                 <a href="{{ url('/intervention-records') }}" class="btn btn-primary">Records</a>
+
+                <!-- Vehicle Types -->
+                <a href="{{ url('/vehicle-types') }}" class="btn btn-primary">Vehicle Types</a>
+
+                <!-- Vehicles -->
+                <a href="{{ url('/vehicles') }}" class="btn btn-primary">Vehicles</a>
             </div>
         </div>
     </div>

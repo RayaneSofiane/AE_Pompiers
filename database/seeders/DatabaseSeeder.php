@@ -9,6 +9,8 @@ use App\Models\InterventionType;
 use App\Models\InterventionRecord;
 use App\Models\Grade;
 use App\Models\Firefighter;
+use App\Models\VehicleType;
+use App\Models\Vehicle;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -230,6 +232,37 @@ class DatabaseSeeder extends Seeder
 
         foreach ($interventionRecords as $record) {
             InterventionRecord::create($record);
+        }
+
+        // Create sample vehicle types
+        $vehicleTypes = [
+            ['code' => 'FIRETRUCK', 'description' => 'Fire Engine Truck - Main fire fighting vehicle'],
+            ['code' => 'LADDER', 'description' => 'Ladder Truck - Aerial ladder unit'],
+            ['code' => 'RESCUE', 'description' => 'Rescue Unit - Hazmat and specialized rescue'],
+            ['code' => 'TANKER', 'description' => 'Water Tanker - Water supply vehicle'],
+            ['code' => 'AMBULANCE', 'description' => 'Medical Unit - Medical emergency response'],
+        ];
+
+        foreach ($vehicleTypes as $type) {
+            VehicleType::create($type);
+        }
+
+        // Create sample vehicles
+        $vehicles = [
+            ['no_identification' => 'VH-001', 'immatriculation' => 'FD-001-MTL', 'annee_mise_en_service' => 2020, 'marque' => 'Pierce', 'modele' => 'Enforcer PUC', 'id_type_vehicle' => 1, 'id_fire_station' => 1],
+            ['no_identification' => 'VH-002', 'immatriculation' => 'FD-002-MTL', 'annee_mise_en_service' => 2019, 'marque' => 'Sutphen', 'modele' => 'SP 100 Aerial', 'id_type_vehicle' => 2, 'id_fire_station' => 1],
+            ['no_identification' => 'VH-003', 'immatriculation' => 'FD-003-MTL', 'annee_mise_en_service' => 2021, 'marque' => 'Rosenbauer', 'modele' => 'Commander', 'id_type_vehicle' => 1, 'id_fire_station' => 2],
+            ['no_identification' => 'VH-004', 'immatriculation' => 'FD-004-MTL', 'annee_mise_en_service' => 2018, 'marque' => 'Pierce', 'modele' => 'Heavy Duty Aerial', 'id_type_vehicle' => 2, 'id_fire_station' => 2],
+            ['no_identification' => 'VH-005', 'immatriculation' => 'FD-001-QC', 'annee_mise_en_service' => 2022, 'marque' => 'Spartan', 'modele' => 'SPH 100 Rescue', 'id_type_vehicle' => 3, 'id_fire_station' => 3],
+            ['no_identification' => 'VH-006', 'immatriculation' => 'FD-002-QC', 'annee_mise_en_service' => 2020, 'marque' => 'Freightliner', 'modele' => 'Water Tanker', 'id_type_vehicle' => 4, 'id_fire_station' => 3],
+            ['no_identification' => 'VH-007', 'immatriculation' => 'FD-001-LAV', 'annee_mise_en_service' => 2021, 'marque' => 'Braun', 'modele' => 'Type I Advanced Life Support', 'id_type_vehicle' => 5, 'id_fire_station' => 4],
+            ['no_identification' => 'VH-008', 'immatriculation' => 'FD-001-GAT', 'annee_mise_en_service' => 2019, 'marque' => 'E-One', 'modele' => 'Typhoon', 'id_type_vehicle' => 1, 'id_fire_station' => 5],
+            ['no_identification' => 'VH-009', 'immatriculation' => 'FD-002-GAT', 'annee_mise_en_service' => 2020, 'marque' => 'American LaFrance', 'modele' => 'Eagle', 'id_type_vehicle' => 4, 'id_fire_station' => 5],
+            ['no_identification' => 'VH-010', 'immatriculation' => 'FD-002-LAV', 'annee_mise_en_service' => 2022, 'marque' => 'Braun', 'modele' => 'Type I Standard Life Support', 'id_type_vehicle' => 5, 'id_fire_station' => 1],
+        ];
+
+        foreach ($vehicles as $vehicle) {
+            Vehicle::create($vehicle);
         }
     }
 }

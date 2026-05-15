@@ -6,6 +6,8 @@ use App\Http\Controllers\InterventionTypeController;
 use App\Http\Controllers\InterventionRecordController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\FirefighterController;
+use App\Http\Controllers\VehicleTypeController;
+use App\Http\Controllers\VehicleController;
 
 // Fire Stations Routes
 Route::get('/', [FireStationController::class, 'index']);
@@ -47,3 +49,19 @@ Route::get('/firefighters/{id}/edit', [FirefighterController::class, 'formModify
 Route::put('/firefighters/{id}/update', [FirefighterController::class, 'update']);
 Route::delete('/firefighters/{id}/delete', [FirefighterController::class, 'delete']);
 Route::delete('/firefighters/clear', [FirefighterController::class, 'clear']);
+
+// Vehicle Types Routes
+Route::get('/vehicle-types', [VehicleTypeController::class, 'index']);
+Route::post('/vehicle-types/add', [VehicleTypeController::class, 'add']);
+Route::get('/vehicle-types/{id}/edit', [VehicleTypeController::class, 'formModify']);
+Route::put('/vehicle-types/{id}/update', [VehicleTypeController::class, 'update']);
+Route::delete('/vehicle-types/{id}/delete', [VehicleTypeController::class, 'delete']);
+Route::delete('/vehicle-types/clear', [VehicleTypeController::class, 'clear']);
+
+// Vehicles Routes
+Route::get('/vehicles', [VehicleController::class, 'index']);
+Route::post('/vehicles/add', [VehicleController::class, 'add']);
+Route::get('/vehicles/{id}/edit', [VehicleController::class, 'formModify']);
+Route::put('/vehicles/{id}/update', [VehicleController::class, 'update']);
+Route::delete('/vehicles/{id}/delete', [VehicleController::class, 'delete']);
+Route::delete('/vehicles/clear', [VehicleController::class, 'clear']);
