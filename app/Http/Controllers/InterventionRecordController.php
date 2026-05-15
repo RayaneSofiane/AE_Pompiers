@@ -53,9 +53,9 @@ class InterventionRecordController extends Controller
     {
         $interventionRecord = InterventionRecord::findOrFail($id);
         $interventionTypes = InterventionType::all();
+        $fireStations = FireStation::all();
         $captains = Firefighter::all();
-        return view('interventionRecordModify', compact('interventionRecord', 'interventionTypes', 'fireStations', 'captai
-        return view('interventionRecordModify', compact('interventionRecord', 'interventionTypes', 'fireStations'));
+        return view('interventionRecordModify', compact('interventionRecord', 'interventionTypes', 'fireStations', 'captains'));
     }
 
     public function update(Request $request, $id)
