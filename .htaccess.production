@@ -1,0 +1,99 @@
+# Production environment configuration file
+# Copy to root directory for shared hosting deployments
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+    
+    RewriteEngine On
+    
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+    
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+    
+    # Force HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Remove index.php from URL if present
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !^/index\.php
+    RewriteRule ^(.*)$ /index.php [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Security Headers
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # CORS Headers (if needed)
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+</IfModule>
+
+# Compress Text Files
+<IfModule mod_deflate.c>
+    AddType application/x-font-ttf ttf
+    AddType application/x-font-otf otf
+    AddType application/x-font-woff woff
+    AddType application/x-font-woff2 woff2
+    AddType image/svg+xml svg svgz
+    AddEncoding gzip svgz
+    
+    <FilesMatch "\.(js|css|xml|gz|txt|html|eot|svg|ttf|otf|woff|woff2)$">
+        SetOutputFilter DEFLATE
+    </FilesMatch>
+</IfModule>
+
+# Cache Control
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    
+    # Images
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    
+    # CSS and JS
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    
+    # Fonts
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+    ExpiresByType application/x-font-otf "access plus 1 year"
+    ExpiresByType application/x-font-woff "access plus 1 year"
+    ExpiresByType application/x-font-woff2 "access plus 1 year"
+    
+    # HTML - Don't cache
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# Disable Directory Listing
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+# Block Access to Sensitive Files
+<FilesMatch "(\.env|\.git|\.htaccess|package\.json|composer\.json|composer\.lock|webpack\.mix\.js|artisan)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Allow Access to Public Files
+<Directory /public>
+    Allow from all
+</Directory>
