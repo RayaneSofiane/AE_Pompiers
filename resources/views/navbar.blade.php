@@ -9,6 +9,18 @@
                     <a href="{{ url('/fireStations') }}" class="btn btn-success" style="margin-right: 0.5rem;">+ Add</a>
                 </div>
 
+                <!-- Grades -->
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="{{ url('/grades') }}" class="btn btn-primary">Grades</a>
+                    <a href="{{ url('/grades') }}" class="btn btn-success" style="margin-right: 0.5rem;">+ Add</a>
+                </div>
+
+                <!-- Firefighters -->
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="{{ url('/firefighters') }}" class="btn btn-primary">Firefighters</a>
+                    <a href="{{ url('/firefighters') }}" class="btn btn-success" style="margin-right: 0.5rem;">+ Add</a>
+                </div>
+
                 <!-- Intervention Types -->
                 <div style="display: flex; gap: 0.5rem;">
                     <a href="{{ url('/intervention-types') }}" class="btn btn-primary">Intervention Types</a>

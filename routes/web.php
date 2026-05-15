@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FireStationController;
 use App\Http\Controllers\InterventionTypeController;
 use App\Http\Controllers\InterventionRecordController;
+use App\Http\Controllers\GradeController;
+use App\Http\Controllers\FirefighterController;
 
 // Fire Stations Routes
 Route::get('/', [FireStationController::class, 'index']);
@@ -31,3 +33,17 @@ Route::get('/intervention-records/{id}/edit', [InterventionRecordController::cla
 Route::put('/intervention-records/{id}/update', [InterventionRecordController::class, 'update']);
 Route::delete('/intervention-records/{id}/delete', [InterventionRecordController::class, 'delete']);
 Route::delete('/intervention-records/clear', [InterventionRecordController::class, 'clear']);
+
+// Grades Routes
+Route::get('/grades', [GradeController::class, 'index']);
+Route::post('/grades/add', [GradeController::class, 'add']);
+Route::delete('/grades/{id}/delete', [GradeController::class, 'delete']);
+Route::delete('/grades/clear', [GradeController::class, 'clear']);
+
+// Firefighters Routes
+Route::get('/firefighters', [FirefighterController::class, 'index']);
+Route::post('/firefighters/add', [FirefighterController::class, 'add']);
+Route::get('/firefighters/{id}/edit', [FirefighterController::class, 'formModify']);
+Route::put('/firefighters/{id}/update', [FirefighterController::class, 'update']);
+Route::delete('/firefighters/{id}/delete', [FirefighterController::class, 'delete']);
+Route::delete('/firefighters/clear', [FirefighterController::class, 'clear']);
