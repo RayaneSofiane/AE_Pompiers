@@ -15,6 +15,7 @@ class InterventionRecord extends Model
         'summary',
         'id_type_intervention',
         'id_fire_station',
+        'id_captain',
     ];
 
     public function interventionType()
@@ -25,5 +26,10 @@ class InterventionRecord extends Model
     public function fireStation()
     {
         return $this->belongsTo(FireStation::class, 'id_fire_station');
+    }
+
+    public function captain()
+    {
+        return $this->belongsTo(Firefighter::class, 'id_captain');
     }
 }

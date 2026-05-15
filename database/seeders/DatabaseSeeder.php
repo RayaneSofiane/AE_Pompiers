@@ -7,6 +7,8 @@ use App\Models\State;
 use App\Models\FireStation;
 use App\Models\InterventionType;
 use App\Models\InterventionRecord;
+use App\Models\Grade;
+use App\Models\Firefighter;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -80,6 +82,40 @@ class DatabaseSeeder extends Seeder
             FireStation::create($station);
         }
 
+        // Create sample grades
+        $grades = [
+            ['description' => 'Directeur'],
+            ['description' => 'Directeur adjoint'],
+            ['description' => 'Capitaine'],
+            ['description' => 'Lieutenant'],
+            ['description' => 'Lieutenant substitut'],
+            ['description' => 'Pompier'],
+            ['description' => 'Pompier recrue'],
+        ];
+
+        foreach ($grades as $grade) {
+            Grade::create($grade);
+        }
+
+        // Create sample firefighters
+        $firefighters = [
+            ['matricule' => 'FF001', 'id_grade' => 3, 'nom' => 'Dubois', 'prenom' => 'Jean', 'id_fire_station' => 1],
+            ['matricule' => 'FF002', 'id_grade' => 4, 'nom' => 'Martin', 'prenom' => 'Pierre', 'id_fire_station' => 1],
+            ['matricule' => 'FF003', 'id_grade' => 6, 'nom' => 'Bertrand', 'prenom' => 'Marc', 'id_fire_station' => 1],
+            ['matricule' => 'FF004', 'id_grade' => 3, 'nom' => 'Lefebvre', 'prenom' => 'Michel', 'id_fire_station' => 2],
+            ['matricule' => 'FF005', 'id_grade' => 6, 'nom' => 'Robert', 'prenom' => 'Daniel', 'id_fire_station' => 2],
+            ['matricule' => 'FF006', 'id_grade' => 3, 'nom' => 'Fournier', 'prenom' => 'Jacques', 'id_fire_station' => 3],
+            ['matricule' => 'FF007', 'id_grade' => 6, 'nom' => 'Leclerc', 'prenom' => 'Gérard', 'id_fire_station' => 3],
+            ['matricule' => 'FF008', 'id_grade' => 3, 'nom' => 'Hébert', 'prenom' => 'Claude', 'id_fire_station' => 4],
+            ['matricule' => 'FF009', 'id_grade' => 6, 'nom' => 'Deschamps', 'prenom' => 'Luc', 'id_fire_station' => 4],
+            ['matricule' => 'FF010', 'id_grade' => 3, 'nom' => 'Beaulieu', 'prenom' => 'André', 'id_fire_station' => 5],
+            ['matricule' => 'FF011', 'id_grade' => 6, 'nom' => 'Gagnon', 'prenom' => 'Serge', 'id_fire_station' => 5],
+        ];
+
+        foreach ($firefighters as $firefighter) {
+            Firefighter::create($firefighter);
+        }
+
         // Create sample intervention types
         $interventionTypes = [
             [
@@ -116,6 +152,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Car fire on highway. Vehicle fully engulfed. Extinguished with foam. No injuries. Vehicle total loss.',
                 'id_type_intervention' => 1,
                 'id_fire_station' => 1,
+                'id_captain' => 1,
             ],
             [
                 'date_time_start' => '2024-01-16 09:15:00',
@@ -123,6 +160,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Residential fire in 3-story building. Quick response prevented spread. One resident evacuated safely. Cause under investigation.',
                 'id_type_intervention' => 2,
                 'id_fire_station' => 2,
+                'id_captain' => 4,
             ],
             [
                 'date_time_start' => '2024-01-17 18:45:00',
@@ -130,6 +168,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Medical emergency - elderly person with chest pain. Paramedics provided oxygen and monitoring. Patient transported to hospital.',
                 'id_type_intervention' => 3,
                 'id_fire_station' => 3,
+                'id_captain' => 6,
             ],
             [
                 'date_time_start' => '2024-01-18 22:30:00',
@@ -137,6 +176,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Multi-vehicle collision on Autoroute 15. Two vehicles. One driver trapped. Extrication performed. Two patients transported.',
                 'id_type_intervention' => 4,
                 'id_fire_station' => 4,
+                'id_captain' => 8,
             ],
             [
                 'date_time_start' => '2024-01-19 11:00:00',
@@ -144,6 +184,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Chemical spill at industrial facility. 500 liters of unknown chemical. Area cordoned off. HAZMAT team called. No injuries.',
                 'id_type_intervention' => 5,
                 'id_fire_station' => 5,
+                'id_captain' => 10,
             ],
             [
                 'date_time_start' => '2024-01-20 16:20:00',
@@ -151,6 +192,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Apartment fire - smoke alarm activated by early detection. Fire contained to kitchen. Damage minimal. Family safe outside.',
                 'id_type_intervention' => 2,
                 'id_fire_station' => 1,
+                'id_captain' => 1,
             ],
             [
                 'date_time_start' => '2024-01-21 08:00:00',
@@ -158,6 +200,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Medical call - diabetic crisis. Patient conscious and responsive. Blood sugar monitored and adjusted at scene.',
                 'id_type_intervention' => 3,
                 'id_fire_station' => 3,
+                'id_captain' => 6,
             ],
             [
                 'date_time_start' => '2024-01-22 13:45:00',
@@ -165,6 +208,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Two-car collision on residential street. Minor injuries only. Both drivers lucid and cooperative. Police attended.',
                 'id_type_intervention' => 4,
                 'id_fire_station' => 2,
+                'id_captain' => 4,
             ],
             [
                 'date_time_start' => '2024-01-23 19:30:00',
@@ -172,6 +216,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Truck fire on bridge. Driver exited safely. Fire spread to cargo. Used water and foam. Bridge temporarily closed.',
                 'id_type_intervention' => 1,
                 'id_fire_station' => 1,
+                'id_captain' => 1,
             ],
             [
                 'date_time_start' => '2024-01-24 10:15:00',
@@ -179,6 +224,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Warehouse fire - partial collapse of roof. Fire services coordinated with police. No personnel on site. Cause under investigation.',
                 'id_type_intervention' => 2,
                 'id_fire_station' => 4,
+                'id_captain' => 8,
             ],
         ];
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\InterventionRecord;
 use App\Models\InterventionType;
 use App\Models\FireStation;
+use App\Models\Firefighter;
 use Illuminate\Http\Request;
 
 class InterventionRecordController extends Controller
@@ -34,6 +35,7 @@ class InterventionRecordController extends Controller
             'summary' => 'required|string',
             'id_type_intervention' => 'required|exists:intervention_types,id',
             'id_fire_station' => 'required|exists:fire_stations,id',
+            'id_captain' => 'nullable|exists:firefighters,id',
         ]);
 
         InterventionRecord::create($validated);
@@ -51,7 +53,8 @@ class InterventionRecordController extends Controller
     {
         $interventionRecord = InterventionRecord::findOrFail($id);
         $interventionTypes = InterventionType::all();
-        $fireStations = FireStation::all();
+        $captains = Firefighter::all();
+        return view('interventionRecordModify', compact('interventionRecord', 'interventionTypes', 'fireStations', 'captai
         return view('interventionRecordModify', compact('interventionRecord', 'interventionTypes', 'fireStations'));
     }
 
@@ -64,6 +67,7 @@ class InterventionRecordController extends Controller
             'address' => 'required|string|max:255',
             'summary' => 'required|string',
             'id_type_intervention' => 'required|exists:intervention_types,id',
+            'id_captain' => 'nullable|exists:firefighters,id',
             'id_fire_station' => 'required|exists:fire_stations,id',
         ]);
 

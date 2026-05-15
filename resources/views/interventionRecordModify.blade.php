@@ -63,6 +63,21 @@
                 @enderror
             </div>
 
+            <div class="form-group">
+                <label for="id_captain">Assigned Captain (Optional):</label>
+                <select id="id_captain" name="id_captain">
+                    <option value="">-- Select Captain --</option>
+                    @foreach($captains as $firefighter)
+                        <option value="{{ $firefighter->id }}" {{ old('id_captain', $interventionRecord->id_captain) == $firefighter->id ? 'selected' : '' }}>
+                            {{ $firefighter->prenom }} {{ $firefighter->nom }} - {{ $firefighter->grade->description }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('id_captain')
+                    <span style="color: #e74c3c; font-size: 0.85rem;">{{ $message }}</span>
+                @enderror
+            </div>
+
             <div style="display: flex; gap: 1rem;">
                 <button type="submit" class="btn btn-success">Update Record</button>
                 <a href="{{ url('/intervention-records') }}" class="btn btn-primary" style="text-decoration: none; padding: 0.5rem 1rem;">Cancel</a>

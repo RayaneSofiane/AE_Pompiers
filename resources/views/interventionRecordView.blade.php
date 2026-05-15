@@ -25,6 +25,12 @@
                 <strong>Fire Station:</strong> {{ $interventionRecord->fireStation->name }}
             </div>
             
+            @if($interventionRecord->captain)
+                <div style="margin-bottom: 1rem;">
+                    <strong>Assigned Captain:</strong> {{ $interventionRecord->captain->prenom }} {{ $interventionRecord->captain->nom }} ({{ $interventionRecord->captain->grade->description }})
+                </div>
+            @endif
+            
             <div style="margin-bottom: 1rem;">
                 <strong>Summary:</strong>
                 <div style="background-color: white; padding: 1rem; margin-top: 0.5rem; border-radius: 4px; border: 1px solid #ddd;">
