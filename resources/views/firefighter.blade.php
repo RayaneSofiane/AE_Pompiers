@@ -5,14 +5,25 @@
         <h2 style="margin-top: 0;">Firefighters List</h2>
         
         <div style="margin-bottom: 1.5rem;">
-            <a href="#add-form" class="btn btn-success">+ Add New Firefighter</a>
-            @if(count($firefighters) > 0)
-                <form method="POST" action="{{ url('/firefighters/clear') }}" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to clear all firefighters?');">Clear All</button>
-                </form>
-            @endif
+            <div style="display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap;">
+                <div style="min-width: 250px;">
+                    <label for="stationFilter" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Filter by Fire Station:</label>
+                    <select id="stationFilter" onchange="window.location.href = this.value ? '{{ url('/firefighters') }}?fire_station_id=' + this.value : '{{ url('/firefighters') }}'" style="width: 100%; padding: 0.5rem; border: 2px solid #3498db; border-radius: 4px;">
+                        <option value="">-- All Fire Stations --</option>
+                        @foreach($fireStations as $station)
+                            <option value="{{ $station->id }}" {{ $selectedStationId == $station->id ? 'selected' : '' }}>{{ $station->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <a href="#add-form" class="btn btn-success">+ Add New Firefighter</a>
+                @if(count($firefighters) > 0)
+                    <form method="POST" action="{{ url('/firefighters/clear') }}" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to clear all firefighters?');">Clear All</button>
+                    </form>
+                @endif
+            </div>
         </div>
 
         @if(count($firefighters) > 0)

@@ -5,22 +5,26 @@
         <h2 style="margin-top: 0;">Intervention Records</h2>
         
         <div style="margin-bottom: 1.5rem;">
-            <a href="#add-form" class="btn btn-success">+ Add New Intervention Record</a>
-            @if(count($interventionRecords) > 0)
-                <form method="POST" action="{{ url('/intervention-records/clear') }}" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to clear all records?');">Clear All</button>
-                </form>
-            @endif
-        </div>
-
-        @if($selectedFireStation)
-            <div style="background-color: #e8f4f8; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
-                <p><strong>Filtering by Fire Station:</strong> {{ $selectedFireStation->name }}</p>
-                <a href="{{ url('/intervention-records') }}" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">View All</a>
+            <div style="display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap;">
+                <div style="min-width: 250px;">
+                    <label for="stationFilter" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Filter by Fire Station:</label>
+                    <select id="stationFilter" onchange="window.location.href = this.value ? '{{ url('/intervention-records') }}?fire_station_id=' + this.value : '{{ url('/intervention-records') }}'" style="width: 100%; padding: 0.5rem; border: 2px solid #3498db; border-radius: 4px;">
+                        <option value="">-- All Fire Stations --</option>
+                        @foreach($fireStations as $station)
+                            <option value="{{ $station->id }}" {{ $selectedStationId == $station->id ? 'selected' : '' }}>{{ $station->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <a href="#add-form" class="btn btn-success">+ Add New Intervention Record</a>
+                @if(count($interventionRecords) > 0)
+                    <form method="POST" action="{{ url('/intervention-records/clear') }}" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to clear all records?');">Clear All</button>
+                    </form>
+                @endif
             </div>
-        @endif
+        </div>
 
         @if(count($interventionRecords) > 0)
             <table>

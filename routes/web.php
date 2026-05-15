@@ -28,7 +28,6 @@ Route::delete('/intervention-types/clear', [InterventionTypeController::class, '
 
 // Intervention Records Routes
 Route::get('/intervention-records', [InterventionRecordController::class, 'index']);
-Route::get('/intervention-records/by-station/{fireStationId}', [InterventionRecordController::class, 'index']);
 Route::post('/intervention-records/add', [InterventionRecordController::class, 'add']);
 Route::get('/intervention-records/{id}/view', [InterventionRecordController::class, 'open']);
 Route::get('/intervention-records/{id}/edit', [InterventionRecordController::class, 'formModify']);

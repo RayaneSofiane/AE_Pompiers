@@ -22,7 +22,7 @@ class InterventionTypeController extends Controller
 
         InterventionType::create($validated);
 
-        return redirect('/intervention-types')->with('success', 'Intervention type added successfully!');
+        return redirect('/intervention-types')->with('success', 'Type d\'intervention ajouté avec succès !');
     }
 
     public function formModify($id)
@@ -42,7 +42,7 @@ class InterventionTypeController extends Controller
 
         $interventionType->update($validated);
 
-        return redirect('/intervention-types')->with('success', 'Intervention type updated successfully!');
+        return redirect('/intervention-types')->with('success', 'Type d\'intervention mis à jour avec succès !');
     }
 
     public function delete($id)
@@ -50,13 +50,13 @@ class InterventionTypeController extends Controller
         $interventionType = InterventionType::findOrFail($id);
         $interventionType->delete();
 
-        return redirect('/intervention-types')->with('success', 'Intervention type deleted successfully!');
+        return redirect('/intervention-types')->with('success', 'Type d\'intervention supprimé avec succès !');
     }
 
     public function clear()
     {
         InterventionType::truncate();
 
-        return redirect('/intervention-types')->with('success', 'All intervention types cleared!');
+        return redirect('/intervention-types')->with('success', 'Tous les types d\'interventions ont été supprimés !');
     }
 }

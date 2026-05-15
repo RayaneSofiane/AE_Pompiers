@@ -9,10 +9,17 @@ use Illuminate\Http\Request;
 
 class FirefighterController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $firefighters = Firefighter::with(['grade', 'fireStation'])->get();
-        return view('firefighter', ['firefighters' => $firefighters]);
+        $fireStations = FireStation::all();
+        $query = Firefighter::with(['grade', 'fireStation']);
+        
+        if ($request->has('fire_station_id') && $request->fire_station_id != '') {
+            $query->where('id_fire_station', $request->fire_station_id);
+        }
+        
+        $firefighters = $query->get();
+        return view('firefighter', ['firefighters' => $firefighters, 'fireStations' => $fireStations, 'selectedStationId' => $request->fire_station_id]);
     }
 
     public function add(Request $request)

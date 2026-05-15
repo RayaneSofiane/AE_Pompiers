@@ -10,21 +10,21 @@ use Illuminate\Http\Request;
 
 class InterventionRecordController extends Controller
 {
-    public function index($fireStationId = null)
+    public function index(Request $request)
     {
         $fireStations = FireStation::all();
+        $query = InterventionRecord::with(['interventionType', 'fireStation']);
         
-        if ($fireStationId) {
-            $interventionRecords = InterventionRecord::where('id_fire_station', $fireStationId)
-                ->with(['interventionType', 'fireStation'])
-                ->get();
-            $selectedFireStation = FireStation::findOrFail($fireStationId);
-        } else {
-            $interventionRecords = InterventionRecord::with(['interventionType', 'fireStation'])->get();
-            $selectedFireStation = null;
+        if ($request->has('fire_station_id') && $request->fire_station_id != '') {
+            $query->where('id_fire_station', $request->fire_station_id);
         }
-
-        return view('interventionRecord', compact('interventionRecords', 'fireStations', 'selectedFireStation'));
+        
+        $interventionRecords = $query->get();
+        return view('interventionRecord', [
+            'interventionRecords' => $interventionRecords,
+            'fireStations' => $fireStations,
+            'selectedStationId' => $request->fire_station_id
+        ]);
     }
 
     public function add(Request $request)

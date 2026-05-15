@@ -21,7 +21,7 @@ class VehicleTypeController extends Controller
         ]);
 
         VehicleType::create($validated);
-        return redirect('/vehicle-types')->with('success', 'Vehicle type added successfully.');
+        return redirect('/vehicle-types')->with('success', 'Type de véhicule ajouté avec succès.');
     }
 
     public function formModify($id)
@@ -38,18 +38,18 @@ class VehicleTypeController extends Controller
         ]);
 
         VehicleType::find($id)->update($validated);
-        return redirect('/vehicle-types')->with('success', 'Vehicle type updated successfully.');
+        return redirect('/vehicle-types')->with('success', 'Type de véhicule mis à jour avec succès.');
     }
 
     public function delete($id)
     {
         VehicleType::find($id)->delete();
-        return redirect('/vehicle-types')->with('success', 'Vehicle type deleted successfully.');
+        return redirect('/vehicle-types')->with('success', 'Type de véhicule supprimé avec succès.');
     }
 
     public function clear()
     {
         VehicleType::truncate();
-        return redirect('/vehicle-types')->with('success', 'All vehicle types cleared successfully.');
+        return redirect('/vehicle-types')->with('success', 'Tous les types de véhicules ont été supprimés avec succès.');
     }
 }

@@ -1,28 +1,28 @@
 <nav class="navbar">
     <div class="container">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h1 style="margin: 0; font-size: 1.5rem;">🚒 Fire Station Manager</h1>
+            <h1 style="margin: 0; font-size: 1.5rem;">🚒 Gestionnaire de Casernes de Pompiers</h1>
             <div style="display: flex; gap: 1rem;">
-                <!-- Fire Stations -->
-                <a href="{{ url('/fireStations') }}" class="btn btn-primary">Fire Stations</a>
+                <!-- Casernes de Pompiers -->
+                <a href="{{ url('/fireStations') }}" class="btn btn-primary">Casernes</a>
 
                 <!-- Grades -->
                 <a href="{{ url('/grades') }}" class="btn btn-primary">Grades</a>
 
-                <!-- Firefighters -->
-                <a href="{{ url('/firefighters') }}" class="btn btn-primary">Firefighters</a>
+                <!-- Pompiers -->
+                <a href="{{ url('/firefighters') }}" class="btn btn-primary">Pompiers</a>
 
-                <!-- Intervention Types -->
-                <a href="{{ url('/intervention-types') }}" class="btn btn-primary">Intervention Types</a>
+                <!-- Types d'Interventions -->
+                <a href="{{ url('/intervention-types') }}" class="btn btn-primary">Types d'Interventions</a>
 
-                <!-- Intervention Records -->
-                <a href="{{ url('/intervention-records') }}" class="btn btn-primary">Records</a>
+                <!-- Interventions -->
+                <a href="{{ url('/intervention-records') }}" class="btn btn-primary">Interventions</a>
 
-                <!-- Vehicle Types -->
-                <a href="{{ url('/vehicle-types') }}" class="btn btn-primary">Vehicle Types</a>
+                <!-- Types de Véhicules -->
+                <a href="{{ url('/vehicle-types') }}" class="btn btn-primary">Types de Véhicules</a>
 
-                <!-- Vehicles -->
-                <a href="{{ url('/vehicles') }}" class="btn btn-primary">Vehicles</a>
+                <!-- Véhicules -->
+                <a href="{{ url('/vehicles') }}" class="btn btn-primary">Véhicules</a>
             </div>
         </div>
     </div>

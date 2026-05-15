@@ -9,10 +9,17 @@ use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $vehicles = Vehicle::with(['vehicleType', 'fireStation'])->get();
-        return view('vehicle', ['vehicles' => $vehicles]);
+        $fireStations = FireStation::all();
+        $query = Vehicle::with(['vehicleType', 'fireStation']);
+        
+        if ($request->has('fire_station_id') && $request->fire_station_id != '') {
+            $query->where('id_fire_station', $request->fire_station_id);
+        }
+        
+        $vehicles = $query->get();
+        return view('vehicle', ['vehicles' => $vehicles, 'fireStations' => $fireStations, 'selectedStationId' => $request->fire_station_id]);
     }
 
     public function add(Request $request)

@@ -5,14 +5,25 @@
         <h2 style="margin-top: 0;">Vehicles List</h2>
         
         <div style="margin-bottom: 1.5rem;">
-            <a href="#add-form" class="btn btn-success">+ Add New Vehicle</a>
-            @if(count($vehicles) > 0)
-                <form method="POST" action="{{ url('/vehicles/clear') }}" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to clear all vehicles?');">Clear All</button>
-                </form>
-            @endif
+            <div style="display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap;">
+                <div style="min-width: 250px;">
+                    <label for="stationFilter" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Filter by Fire Station:</label>
+                    <select id="stationFilter" onchange="window.location.href = this.value ? '{{ url('/vehicles') }}?fire_station_id=' + this.value : '{{ url('/vehicles') }}'" style="width: 100%; padding: 0.5rem; border: 2px solid #3498db; border-radius: 4px;">
+                        <option value="">-- All Fire Stations --</option>
+                        @foreach($fireStations as $station)
+                            <option value="{{ $station->id }}" {{ $selectedStationId == $station->id ? 'selected' : '' }}>{{ $station->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <a href="#add-form" class="btn btn-success">+ Add New Vehicle</a>
+                @if(count($vehicles) > 0)
+                    <form method="POST" action="{{ url('/vehicles/clear') }}" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to clear all vehicles?');">Clear All</button>
+                    </form>
+                @endif
+            </div>
         </div>
 
         @if(count($vehicles) > 0)
